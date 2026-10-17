@@ -1,0 +1,28 @@
+# Java / Maven
+backend/target/
+*.class
+!backend/.mvn/wrapper/maven-wrapper.jar
+
+# Local image storage (development)
+backend/uploads/
+
+# Node / Next.js
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/next-env.d.ts
+
+# Secrets — never commit
+.env
+.env.local
+*.pem
+
+# Claude Code personal settings (shared skills and CLAUDE.md ARE committed)
+.claude/settings.local.json
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
