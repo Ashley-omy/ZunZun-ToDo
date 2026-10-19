@@ -265,15 +265,15 @@ The frontend (`zunzuntodo.app`) and the API (`api.zunzuntodo.app`) share one reg
 
 | Layer | Technology | Notes |
 |---|---|---|
-| Language | Java 25 | Latest Java version supported by Spring Boot 3.5 |
-| Framework | Spring Boot 3.5.x | Web, Data JPA, Security, OAuth2 Client, OAuth2 Resource Server (JWT), Validation, Actuator |
+| Language | Java 25 | Current LTS; supported by Spring Boot 4.1 |
+| Framework | Spring Boot 4.1.x | Web MVC, Data JPA, Security, OAuth2 Client, OAuth2 Resource Server (JWT), Validation, Actuator; see ADR 0001 |
 | Build | Maven (with Maven Wrapper `./mvnw`) | |
 | Database | PostgreSQL 17, Flyway migrations | |
 | Mapping / docs | MapStruct, springdoc-openapi | |
 | Storage | AWS SDK v2 (S3) | Local file storage in development |
 | Rate limiting | Bucket4j (in memory) | Sufficient for a single API instance |
 | Frontend | Next.js (App Router), TypeScript, Tailwind CSS, TanStack Query, Recharts, date-fns | |
-| Testing | JUnit 5, Mockito, Testcontainers (PostgreSQL), Spring Security Test | |
+| Testing | JUnit Jupiter, Mockito, Testcontainers 2 (PostgreSQL), Spring Security Test | Versions managed by Spring Boot |
 | CI/CD | GitHub Actions | Backend deploys to ECS; frontend deploys through Vercel |
 | Hosting | Vercel (frontend), AWS eu-west-3 (backend) | |
 
@@ -689,7 +689,8 @@ Everything in §2 marked **M**: email/password and Google sign-in, profiles with
 | Cookie-based refresh fails across domains | Frontend and API share `zunzuntodo.app`; previews on `*.vercel.app` are documented as not supporting persistent sign-in |
 | Inappropriate comments | Owners can delete comments on their achievements |
 | AWS costs | Smallest instance sizes, single AZ, budget alert created first, environment can be stopped when idle |
-| Spring Boot 3.5 open-source support ended on 30 June 2026 | Track the Spring Boot 4 migration as the first post-release task |
+| Spring Boot 4.1 open-source support ends on 31 July 2027 | Take patch releases as they ship; move to 4.2 (due 30 Nov 2026) after the v1.0 release |
+| Spring Boot 4 is newer, and many online examples still target 3.x (starter names, Jackson 2) | Follow the Spring Boot 4 reference docs and the conventions in `CLAUDE.md` |
 
 ---
 
@@ -706,7 +707,7 @@ Everything in §2 marked **M**: email/password and Google sign-in, profiles with
 
 ## Appendix B — References
 
-1. Spring Boot 3.5 System Requirements — https://docs.spring.io/spring-boot/3.5/system-requirements.html
+1. Spring Boot 4.1 System Requirements — https://docs.spring.io/spring-boot/4.1/system-requirements.html
 2. Spring Security Reference — https://docs.spring.io/spring-security/reference/
 3. PostgreSQL Documentation — https://www.postgresql.org/docs/
 4. Flyway Documentation — https://documentation.red-gate.com/flyway

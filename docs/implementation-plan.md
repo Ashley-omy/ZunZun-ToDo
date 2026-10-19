@@ -41,10 +41,10 @@
 
 **Backend**
 - Create the repository; commit the documentation, `CLAUDE.md`, and skills first
-- Create the Maven backend: Java 25, parent `spring-boot-starter-parent` **3.5.16** (the final 3.5 release), group `com.zunzuntodo`
-  — starters: Web, Data JPA, Security, OAuth2 Client, OAuth2 Resource Server, Validation, Actuator; plus PostgreSQL driver, `flyway-core` + `flyway-database-postgresql`, Testcontainers
-  — Spring Initializr may list only Spring Boot 4.x now; if so, write the `pom.xml` by hand (or ask Claude Code to) rather than generating a 4.x project and downgrading, because 4.x uses different starter names. Add the Maven Wrapper with `mvn wrapper:wrapper`
-- Add MapStruct and springdoc-openapi to `pom.xml`
+- Create the Maven backend with Spring Initializr in `backend/`: Java 25, Spring Boot **4.1.x** (latest stable patch; 4.1.1 at the time of writing), group and package `com.zunzuntodo`, Jar, YAML configuration ([ADR 0001](adr/0001-spring-boot-4.md))
+  — dependencies: Spring Web, Spring Data JPA, Spring Security, OAuth2 Client, OAuth2 Resource Server, Validation, Actuator, PostgreSQL Driver, Flyway Migration, Testcontainers
+  — Boot 4 uses modular starters (`spring-boot-starter-webmvc`, `spring-boot-starter-flyway`, `spring-boot-starter-security-oauth2-client`, …) and matching `-test` starters; keep the names Initializr generates. Check that `flyway-database-postgresql` and `testcontainers-postgresql` are present. The Maven Wrapper is included
+- Add MapStruct and springdoc-openapi **3.x** (the line built for Boot 4) to `pom.xml`
 - `docker-compose.yml` with PostgreSQL 17; `application.yml` + `application-local.yml`; `.env.example`
 - Flyway `V1__users_and_auth.sql` (users, oauth_accounts, refresh_tokens)
 - `/actuator/health` public; CORS for `http://localhost:3000`

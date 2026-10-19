@@ -1,6 +1,6 @@
 ---
 name: write-tests
-description: Write backend tests for ZunZun ToDo — JUnit 5 unit tests and Testcontainers integration tests. Use when the user says "write tests", "add a test", or "improve coverage", and immediately after implementing any new service or controller. Covers the required test areas — authorization and visibility, task completion consistency, chart date ranges, and authentication.
+description: Write backend tests for ZunZun ToDo — JUnit Jupiter unit tests and Testcontainers integration tests. Use when the user says "write tests", "add a test", or "improve coverage", and immediately after implementing any new service or controller. Covers the required test areas — authorization and visibility, task completion consistency, chart date ranges, and authentication.
 ---
 
 # Writing Tests
@@ -13,7 +13,8 @@ description: Write backend tests for ZunZun ToDo — JUnit 5 unit tests and Test
 | Integration test | `XxxIT.java` | Full HTTP API, repositories, migrations | Yes (Testcontainers) |
 
 Integration tests extend `AbstractIntegrationTest`, which starts one PostgreSQL container for the whole run.
-Spring Boot 3.5's `@ServiceConnection` wires the datasource automatically:
+Spring Boot 4's `@ServiceConnection` wires the datasource automatically.
+Testcontainers 2 moved the class to `org.testcontainers.postgresql.PostgreSQLContainer` and dropped the type parameter:
 
 ```java
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -22,9 +23,11 @@ public abstract class AbstractIntegrationTest {
 
     @Container
     @ServiceConnection
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:17-alpine");
+    static PostgreSQLContainer postgres = new PostgreSQLContainer("postgres:17-alpine");
 }
 ```
+
+Use `@MockitoBean` (not the removed `@MockBean`).
 
 Maven Surefire runs `*Test`, Failsafe runs `*IT` (`./mvnw verify` runs both; `./mvnw test` runs unit tests).
 **Never use H2.** Partial indexes and check constraints behave differently there.

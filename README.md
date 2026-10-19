@@ -84,11 +84,11 @@ Design mockups of the screens being built. The app is still in development, so t
 
 | Layer | Technology |
 |---|---|
-| Backend | Java 25, Spring Boot 3.5 (Web, Data JPA, Security, OAuth2), Maven |
+| Backend | Java 25, Spring Boot 4.1 (Web MVC, Data JPA, Security, OAuth2), Maven |
 | Database | PostgreSQL 17, Flyway |
 | Frontend | Next.js (App Router), TypeScript, Tailwind CSS, TanStack Query, Recharts |
 | Security | Google sign-in (OAuth 2.0 / OpenID Connect), JWT access tokens, rotating refresh tokens in HttpOnly cookies |
-| Testing | JUnit 5, Mockito, Testcontainers (real PostgreSQL) |
+| Testing | JUnit Jupiter, Mockito, Testcontainers (real PostgreSQL) |
 | Infrastructure | Docker, GitHub Actions, Vercel, AWS (ECS Fargate, RDS, S3) — hosted in the EU (Paris) |
 
 ---

@@ -23,12 +23,12 @@ multiple languages, Redis. If a task seems to need one of these, stop and ask.
 
 | Layer | Technology |
 |---|---|
-| Backend | Java 25 · Spring Boot 3.5.x (Web, Data JPA, Security, OAuth2 Client, OAuth2 Resource Server, Validation, Actuator) |
+| Backend | Java 25 · Spring Boot 4.1.x (Web MVC, Data JPA, Security, OAuth2 Client, OAuth2 Resource Server, Validation, Actuator) |
 | Build | Maven via the wrapper (`./mvnw`) |
 | Database | PostgreSQL 17 · Flyway |
 | Libraries | MapStruct · springdoc-openapi · AWS SDK v2 (S3) · Bucket4j |
 | Frontend | Next.js (App Router) · TypeScript · Tailwind CSS · TanStack Query · Recharts · date-fns |
-| Testing | JUnit 5 · Mockito · Testcontainers (PostgreSQL) · Spring Security Test |
+| Testing | JUnit Jupiter · Mockito · Testcontainers 2 (PostgreSQL) · Spring Security Test |
 | Hosting | Vercel (cdg1, Paris) · AWS eu-west-3 (Paris): ECS Fargate, RDS, S3 |
 
 ## Directory Layout
@@ -87,6 +87,8 @@ cd frontend && npm run lint
 ## Coding Conventions
 
 **Backend**
+- Spring Boot 4: use the modular starters (`spring-boot-starter-webmvc`, `spring-boot-starter-flyway`, …) and
+  Jackson 3 (`tools.jackson.*`; annotations stay in `com.fasterxml.jackson.annotation`). Don't copy Boot 3 snippets as-is
 - Constructor injection; DTOs are Java records
 - Validation annotations on request DTOs; business rules in services
 - Throw domain exceptions; `GlobalExceptionHandler` turns them into RFC 7807 responses. No try/catch in controllers
